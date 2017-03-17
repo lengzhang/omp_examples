@@ -27,24 +27,38 @@ $ gcc -fopenmp hello.c -o hello
 ## Directive:
 
 #### atomic
+	The memory update (write, or read-modify-write) in the next instruction will be performed atomically.
+	It does not make the entire statement atomic; only the memory update is atomic.
+	A compiler might use special hardware instructions for better performance than when using critical.
 
 #### barrier
-
+	Each thread waits until all threads arrive.
+	
 #### critical
+	Only one thread at a time can enter a critical region.
 
 #### flush
 
 #### for
-
+	Used to split up loop iterations among the threads, also called loop constructs.
+	
 #### master
-
+	The master construct denotes a structured block that is only executed by the master thread.
+	The other threads just skip it.
+	
 #### ordered
 
 #### parallel
 
 #### sections
+	assigning consecutive but independent code blocks to different threads
 
 #### single
+	specifying a code block that is executed by only one thread, a barrier is implied in the end
+	
+	The single construct denotes a block of code that is executed by only one thread (not necessarily the master thread).
+	A barrier is implied at the end of the single block (can remove the barrier with a nowait clause).
+	
 #### threadprivate
 
 ## Clause:
@@ -82,6 +96,7 @@ $ gcc -fopenmp hello.c -o hello
 ##### schedule(runtime)
 
 #### shared
+	the data within a parallel region is shared, which means visible and accessible by all threads simultaneously. By default, all variables in the work sharing region are shared except the loop iteration counter.
 
 ## OpenMP Functions:
 
